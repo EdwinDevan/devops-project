@@ -24,8 +24,8 @@ jobs:
         sudo killall java || true
         
         echo "Deploying the freshly built Maven artifact..."
-        # Running via classpath (-cp) ensures Java discovers App class at the root level of the artifact
-        nohup java -cp target/devops-web-app-1.0-SNAPSHOT.jar App > app.log 2>&1 &
+        # FIX: RUNNER_TRACKING_ID=do_not_kill stops the runner from killing this process at the end of the job
+        RUNNER_TRACKING_ID=do_not_kill nohup java -cp target/devops-web-app-1.0-SNAPSHOT.jar App > app.log 2>&1 &
         
         echo "Waiting for web engine to initialize..."
         sleep 3
