@@ -1,8 +1,17 @@
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+@RestController
 public class App {
     public static void main(String[] args) {
-        System.out.println("==========================================");
-        System.out.println("  DEVOPS INTERNAL ASSESSMENT: SUCCESS!   ");
-        System.out.println("  Hello from Stanley's Ubuntu Runner Node! ");
-        System.out.println("==========================================");
+        SpringApplication.run(App.class, args);
+    }
+
+    @GetMapping("/")
+    public String home() {
+        return "<h1>DEVOPS INTERNAL ASSESSMENT: SUCCESS!</h1><p>Hello from Stanley's Web Server!</p>";
     }
 }
