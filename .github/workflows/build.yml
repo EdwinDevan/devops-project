@@ -1,4 +1,4 @@
-name: Java CI/CD Pipeline
+name: Java Maven CI/CD Pipeline
 
 on:
   push:
@@ -13,12 +13,19 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v4
 
-    - name: Compile Java Application
+    - name: Build and Package with Maven
       run: |
-        echo "Compiling code on the local VM..."
-        javac App.java
+        echo "Running Maven clean build..."
+        mvn clean package
 
-    - name: Run Verified Build Output
+    - name: Deploy Compiled JAR to Background
       run: |
-        echo "Running the compiled application..."
-        java App
+        echo "Stopping any stale Java web server instances..."
+        sudo killall java || true
+        
+        echo "Deploying the freshly built Maven artifact..."
+        # Maven automatically creates a 'target' directory with our executable JAR
+        nohup java -jar target/devops-web-app-1.0-SNAPSHOT.jar > app.log 2>&1 &
+        
+        echo "Waiting for web engine to initialize..."
+        sleep 3
