@@ -15,17 +15,17 @@ jobs:
 
     - name: Build and Package with Maven
       run: |
-        echo "Running Maven clean build..."
+        echo "Running Maven clean package build..."
         mvn clean package
 
     - name: Deploy Compiled JAR to Background
       run: |
-        echo "Stopping any stale Java web server instances..."
+        echo "Stopping any stale Java web server instances running on port 8080..."
         sudo killall java || true
         
         echo "Deploying the freshly built Maven artifact..."
-        # Maven automatically creates a 'target' directory with our executable JAR
-        nohup java -jar target/devops-web-app-1.0-SNAPSHOT.jar > app.log 2>&1 &
+        # Running via classpath (-cp) ensures Java discovers App class at the root level of the artifact
+        nohup java -cp target/devops-web-app-1.0-SNAPSHOT.jar App > app.log 2>&1 &
         
         echo "Waiting for web engine to initialize..."
         sleep 3
