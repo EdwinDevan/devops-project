@@ -1,0 +1,24 @@
+name: Java CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Compile Java Application
+      run: |
+        echo "Compiling code on the local VM..."
+        javac App.java
+
+    - name: Run Verified Build Output
+      run: |
+        echo "Running the compiled application..."
+        java App
