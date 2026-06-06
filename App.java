@@ -15,7 +15,7 @@ public class App {
             public void handle(HttpExchange exchange) throws IOException {
                 String response = "<html><body style='font-family:sans-serif; text-align:center; margin-top:50px;'>"
                                 + "<h1 style='color: #2da44e;'>DEVOPS INTERNAL ASSESSMENT: SUCCESS!</h1>"
-                                + "<h2>Hello from Stanley's Ubuntu Web Server Node!</h2>"
+                                + "<h2>Hello from Edwin's Ubuntu Web Server Node!</h2>"
                                 + "<p>Automated and packaged cleanly using Maven.</p>"
                                 + "</body></html>";
                 exchange.sendResponseHeaders(200, response.length());
