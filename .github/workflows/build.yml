@@ -21,7 +21,7 @@ jobs:
     - name: Deploy Compiled JAR to Background
       run: |
         echo "Stopping any stale Java web server instances running on port 8080..."
-        sudo killall java || true
+        killall java || true
         
         echo "Deploying the freshly built Maven artifact..."
         # FIX: RUNNER_TRACKING_ID=do_not_kill stops the runner from killing this process at the end of the job
